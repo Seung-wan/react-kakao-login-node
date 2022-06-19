@@ -1,15 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { CookiesProvider } from 'react-cookie';
+
 import App from './App';
+
+import './index.css';
 import reportWebVitals from './reportWebVitals';
+import { RecoilRoot } from 'recoil';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <RecoilRoot>
+      <CookiesProvider>
+        <Router>
+          <App />
+        </Router>
+      </CookiesProvider>
+    </RecoilRoot>
   </React.StrictMode>
 );
 
