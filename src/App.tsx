@@ -1,15 +1,17 @@
 import { Routes, Route } from 'react-router-dom';
-import './App.css';
-import Auth from './pages/auth';
+
+import OAuth2Redirect from './auth/OAuth2Redirect';
 import Main from './pages/main';
 
-function App() {
+import './App.css';
+
+const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Main />} />
-      <Route path="/auth" element={<Auth />} />
+      <Route path="/auth/kakao/callback" element={<OAuth2Redirect />} />
     </Routes>
   );
-}
+};
 
 export default App;
