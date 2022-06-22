@@ -1,22 +1,23 @@
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Cookies } from 'react-cookie';
-import { useRecoilState } from 'recoil';
-import { userState } from '../../states/auth';
+import { useState, useEffect } from 'react';
 
-const cookie = new Cookies();
+import { IUser } from '../../types/user';
+import { KAKAO_AUTH_URL } from '../../utils/oAuth';
 
 const Main = () => {
+  const [user, setUser] = useState<IUser>();
+
+  useEffect(() => {
+    if (localStorage.getItem('user'))
+      setUser(JSON.parse(localStorage.getItem('user') as string)[0]);
+  }, []);
+
   return (
-    <div>
-      <header>
-        <ul>
-          <li>
-            <a href="http://localhost:3000/api/v1/auth/kakao">카카오 로그인</a>
-          </li>
-        </ul>
-      </header>
-    </div>
+    <header>
+      <nav>
+        <a href={KAKAO_AUTH_URL}>카카오 로그인</a>
+      </nav>
+      {user && <p>{user.email}</p>}
+    </header>
   );
 };
 
